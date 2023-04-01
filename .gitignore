@@ -8,6 +8,11 @@ __pycache__/
 venv/
 *.log
 
+# Environments
+.env
+.env.example
+
+
 # IDE and editor files
 .vscode/
 .idea/
