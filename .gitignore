@@ -1,0 +1,15 @@
+# .gitignore
+
+# Python and virtual environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+*.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
