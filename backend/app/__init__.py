@@ -1,17 +1,14 @@
 from flask import Flask
-from flask_pymongo import PyMongo
-from flask_jwt_extended import JWTManager
 
-from backend.app.utils import database, security
-from backend.app.api import auth
+from .controllers import entry_controller
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object("backend.app.config")
 
-    database.mongo.init_app(app)
-    security.jwt.init_app(app)
-
+    # Import and register Blueprints
+    from .controllers import auth, user
     app.register_blueprint(auth.bp)
+    app.register_blueprint(entry_controller.bp)
+    app.register_blueprint(user.bp)
 
     return app

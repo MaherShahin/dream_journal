@@ -1,3 +1,10 @@
-from flask_pymongo import PyMongo
+import os
+from pymongo import MongoClient
+from dotenv import load_dotenv
 
-mongo = PyMongo()
+load_dotenv()
+
+MONGO_URI = os.environ["MONGO_URI"]
+
+client = MongoClient(MONGO_URI)
+mongo = client.get_default_database()
