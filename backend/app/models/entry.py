@@ -1,21 +1,12 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql import func
-from .user import User
-from .base import Base
+# backend/app/models/entry.py
+from bson.objectid import ObjectId
 
-class DreamEntry(Base):
-    __tablename__ = 'dream_entries'
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    title = Column(String)
-    content = Column(String)
-    date = Column(DateTime)
-    created_at = Column(DateTime, default=func.now())
-    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
-
-    user = relationship("User", back_populates="dream_entries")
-    
-User.dream_entries = relationship("DreamEntry", back_populates="user")
+class DreamEntry:
+    def __init__(self, data):
+        self.id = str(data["_id"]) if "_id" in data else None
+        self.user_id = data["user_id"]
+        self.title = data["title"]
+        self.content = data["content"]
+        self.date = data.get("date")
+        self.created_at = data.get("created_at")
+        self.updated_at = data.get("updated_at")
